@@ -66,23 +66,14 @@ const images = [
   },
 ];
 
-// <li class="gallery-item">
-//     <a class="gallery-link" href="large-image.jpg">
-//         <img
-//             class="gallery-image"
-//             src="small-image.jpg"
-//             alt="Image description"
-//             />
-//     </a>
-// </li>
-
 const gallerySimple = document.querySelector('.gallery');
 
 const markup = images
   .map(
     image =>
       `<li class="gallery-item">
-      <a class="gallery-link" href=""><img
+      <a class="gallery-link" href=${image.original}>
+      <img
       class="gallery-image"
       src=${image.preview} 
       alt="${image.description}"
@@ -94,9 +85,14 @@ const markup = images
 
 gallerySimple.insertAdjacentHTML('beforeend', markup);
 
-// Описаний в документації
 import SimpleLightbox from 'simplelightbox';
-// Додатковий імпорт стилів
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-let gallery = new SimpleLightbox('.gallery a', {});
+let gallery = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionSelector: 'img',
+  captionType: 'attr',
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
+});
