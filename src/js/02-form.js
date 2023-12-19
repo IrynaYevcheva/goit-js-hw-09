@@ -26,11 +26,15 @@ function renderPage() {
 
 function onSubmit(event) {
   event.preventDefault();
+  const form = event.target;
+  const emailValue = form.elements.email.value.trim();
+  const messageValue = form.elements.message.value.trim();
   if (feedbackForm.email.value === '' || feedbackForm.message.value === '') {
     alert('All form fields must be filled in');
   } else {
     feedbackForm.reset();
     localStorage.removeItem('feedback-form-state');
-    console.log(JSON.parse(userData));
+    const userArr = { email: emailValue, message: messageValue };
+    console.log(userArr);
   }
 }
